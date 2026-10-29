@@ -1,0 +1,70 @@
+@import '@fontsource/poppins/300.css';
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Système de design TeleDesk : typographie Google Poppins, design ultra-pro, épuré et moderne.
+  Thème blanc par défaut : surfaces claires pures, bordures slate nettes, accents vibrants.
+*/
+:root, [data-theme='light'] {
+  --bg: 248 250 252; --surface: 255 255 255; --raised: 241 245 249;
+  --ink: 15 23 42; --muted: 100 116 139; --line: 226 232 240;
+  --brand: 79 70 229; --brand-ink: 255 255 255;
+  --gold: 217 119 6; --gold-ink: 255 255 255;
+  --ok: 16 185 129; --danger: 239 68 68;
+  --accent: var(--brand); --accent-ink: var(--brand-ink);
+  --shadow: 15 23 42;
+  color-scheme: light;
+}
+[data-theme='dark'] {
+  --bg: 15 23 42; --surface: 30 41 59; --raised: 51 65 85;
+  --ink: 248 250 252; --muted: 148 163 184; --line: 51 65 85;
+  --brand: 99 102 241; --brand-ink: 255 255 255;
+  --gold: 245 158 11; --gold-ink: 30 20 0;
+  --ok: 52 211 153; --danger: 248 113 113;
+  --accent: var(--brand); --accent-ink: var(--brand-ink);
+  --shadow: 0 0 0;
+  color-scheme: dark;
+}
+
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { @apply bg-bg font-sans text-ink antialiased; }
+  h1, h2, h3, h4, h5, h6 { @apply font-display tracking-tight font-semibold; }
+  ::selection { background: rgb(var(--brand) / 0.2); color: rgb(var(--brand)); }
+  :focus-visible { outline: 2px solid rgb(var(--brand)); outline-offset: 2px; border-radius: 8px; }
+  button, [role='button'], a { -webkit-tap-highlight-color: transparent; }
+  input, textarea, select { font: inherit; }
+  img, video { max-width: 100%; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgb(var(--muted) / 0.5); }
+}
+
+@layer components {
+  /* Trame tissée : signature visuelle du contenu verrouillé */
+  .weave {
+    background-image:
+      repeating-linear-gradient(45deg, rgb(var(--gold) / 0.16) 0 6px, transparent 6px 12px),
+      repeating-linear-gradient(-45deg, rgb(var(--gold) / 0.10) 0 6px, transparent 6px 12px);
+  }
+  .skeleton { @apply relative overflow-hidden rounded-ctl bg-line/60; }
+  .skeleton::after { content: ''; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgb(var(--surface) / 0.6), transparent); animation: shimmer 1.4s infinite; }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+  .glass { background: rgb(var(--surface) / 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .card-premium { @apply rounded-card border border-line bg-surface shadow-sm transition-all duration-200 hover:shadow-md hover:border-brand/30; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

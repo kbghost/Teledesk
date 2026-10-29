@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+*.log
+uploads/public/*
+uploads/private/*
+!uploads/public/.gitkeep
+!uploads/private/.gitkeep
+coverage
+.vite
+.test-uploads
